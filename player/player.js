@@ -1,6 +1,7 @@
 import SubripVideoElement from '../subrip-video-layer-element.js';
 customElements.define('subrip-video-layer', SubripVideoElement);
 
+const instructions = document.getElementById('instructions');
 const subripLayer = document.querySelector('subrip-video-layer');
 let vidurl = '';
 let srturl = '';
@@ -34,6 +35,8 @@ document.addEventListener('drop', e => {
         subripLayer.src = srturl;
         subripLayer.video.src = vidurl;
         subripLayer.video.play();
+
+        instructions.classList.add('hidden');
 
     }
 
@@ -81,6 +84,40 @@ document.addEventListener('keydown', e => {
             currentFontSize -= 2;
             subripLayer.style.fontSize = `${ currentFontSize }px`;
             break;
+
+        // toggle full screen
+        case 70: // f key
+        {
+
+            // Check against all relevant vendor prefixes
+            const fsel =
+                document.fullscreenElement ||
+                document.webkitFullscreenElement ||
+                document.mozFullscreenElement;
+
+            // Use "call" to invoke the functions with the proper "this".
+            // Using "||" gets the function without the "this" binding
+            if (fsel === subripLayer) {
+
+                (
+                    document.exitFullscreen ||
+                    document.webkitExitFullscreen ||
+                    document.mozExitFullscreen
+                ).call(document);
+
+            } else {
+
+                (
+                    subripLayer.requestFullscreen ||
+                    subripLayer.webkitRequestFullscreen ||
+                    subripLayer.mozRequestFullscreen
+                ).call(subripLayer);
+
+            }
+
+            break;
+
+        }
 
     }
 

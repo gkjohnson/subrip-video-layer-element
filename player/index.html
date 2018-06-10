@@ -10,17 +10,72 @@
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
+                font-family: helvetica, arial, sans-serif;
+                color: white
+            }
+
+            #instructions {
+                opacity: 1;
+                transition: opacity 0.25s ease;
+            }
+
+            #instructions.hidden {
+                opacity: 0;
+            }
+
+            #instructions > div {
+                position: absolute;
+                text-align: center;
+                width: 100%;
+                padding: 10px 0;
+
+                font-size: 25px;
+            }
+
+            #instructions > table {
+                position: absolute;
+                display: inline-block;
+                font-size: 13px;
+                opacity: 0.5;
+
+                left: 10px;
+                bottom: 60px;
+            }
+
+            #instructions > table td:first-child {
+                padding: 0 10px;
+                font-weight: bold;
             }
 
             subrip-video-layer {
-                display: inline-block;
                 width: 100%;
                 height: 100%;
-                background: #111;
+                background: black;
             }
         </style>
     </head>
     <body>
+        <div id="instructions">
+            <div>Drag and Drop a video and srt files</div>
+            <table>
+                <tr>
+                    <td>F</td>
+                    <td>Toggle fullscreen</td>
+                </tr>
+                <tr>
+                    <td>Space</td>
+                    <td>Play / Pause</td>
+                </tr>
+                <tr>
+                    <td>Left / Right</td>
+                    <td>Skip -/+ five seconds</td>
+                </tr>
+                <tr>
+                    <td>Up / Down</td>
+                    <td>Adjust subtitle size</td>
+                </tr>
+            </table>
+        </div>
         <subrip-video-layer>
             <video controls></video>
         </subrip-video-layer>
