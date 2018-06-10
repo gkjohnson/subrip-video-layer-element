@@ -93,7 +93,7 @@ document.addEventListener('keydown', e => {
             const fsel =
                 document.fullscreenElement ||
                 document.webkitFullscreenElement ||
-                document.mozFullscreenElement;
+                document.mozFullScreenElement;
 
             // Use "call" to invoke the functions with the proper "this".
             // Using "||" gets the function without the "this" binding
@@ -102,15 +102,16 @@ document.addEventListener('keydown', e => {
                 (
                     document.exitFullscreen ||
                     document.webkitExitFullscreen ||
-                    document.mozExitFullscreen
+                    document.mozCancelFullScreen
                 ).call(document);
 
             } else {
 
+                console.log(subripLayer.requestFullscreen, subripLayer.mozRequestFullScreen);
                 (
                     subripLayer.requestFullscreen ||
                     subripLayer.webkitRequestFullscreen ||
-                    subripLayer.mozRequestFullscreen
+                    subripLayer.mozRequestFullScreen
                 ).call(subripLayer);
 
             }

@@ -66,6 +66,7 @@ class SubripVideoLayerElement extends HTMLElement {
                     width: 100%;
                     height: 100%;
                     position:absolute;
+                    pointer-events: none;
                 }
 
                 :host .subtitle-container > *:first-child {

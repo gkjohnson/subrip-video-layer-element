@@ -28,6 +28,7 @@
 
             #instructions > div {
                 position: absolute;
+                z-index: 1;
                 text-align: center;
                 width: 100%;
                 padding: 10px 0;
@@ -37,6 +38,7 @@
 
             #instructions > table {
                 position: absolute;
+                z-index: 1;
                 display: inline-block;
                 font-size: 13px;
                 opacity: 0.5;
@@ -54,6 +56,15 @@
                 width: 100vw;
                 height: 100vh;
                 background: black;
+            }
+
+            video {
+                opacity: 0;
+                transition: opacity 1s ease;
+            }
+
+            video[src] {
+                opacity: 1;
             }
         </style>
     </head>
