@@ -13,7 +13,7 @@ document.addEventListener('drop', e => {
     e.preventDefault();
 
     const dtfiles = [...e.dataTransfer.files];
-    const vid = dtfiles.filter(f => /(mp4|ogg|webm)$/.test(f.name)).pop();
+    const vid = dtfiles.filter(f => /(mp4|m4v|ogg|webm)$/.test(f.name)).pop();
     const srt = dtfiles.filter(f => /srt$/.test(f.name)).pop();
 
     URL.revokeObjectURL(vidurl);
