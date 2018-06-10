@@ -49,10 +49,10 @@ class SubripVideoLayerElement extends HTMLElement {
         const subtitleContainerStyle =
             `
                 :host {
-                    font-family: helvetica, arial, sans-serif;
+                    font-family: tahoma, arial, sans-serif;
                     color: white;
                     font-weight: bold;
-                    font-size: 25px;
+                    font-size: 36px;
                     text-shadow: ${ this._getTextShadowStyle() };
                     text-align:center;
                     display: block;
