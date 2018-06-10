@@ -1,0 +1,30 @@
+<html>
+    <head>
+
+        <title>Subtitle Video Player</title>
+
+        <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            subrip-video-layer {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                background: #111;
+            }
+        </style>
+    </head>
+    <body>
+        <subrip-video-layer>
+            <video controls></video>
+        </subrip-video-layer>
+
+        <script type="module" src="./player.js"></script>
+    </body>
+</html>
