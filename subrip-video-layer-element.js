@@ -189,7 +189,7 @@ class SubripVideoLayerElement extends HTMLElement {
     _getTextShadowStyle () {
 
         const offsets = [];
-        const total = 160;
+        const total = 16;
         for (let i = 0; i < total; i++) {
 
             const angle = 2 * Math.PI * (i / total);
