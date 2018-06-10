@@ -56,6 +56,7 @@ class SubripVideoLayerElement extends HTMLElement {
                     text-shadow: ${ this._getTextShadowStyle() };
                     text-align:center;
                     display: block;
+                    overflow: hidden;
                 }
 
                 :host .subtitle-container {

@@ -4,7 +4,9 @@
 
         <title>Subtitle Video Player</title>
 
-        <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+        <!-- <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script> -->
+        <!-- use unpkg for static loading until bundling works -->
+        <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.0/webcomponents-bundle.js"></script>
 
         <style>
             html, body {
@@ -49,8 +51,8 @@
             }
 
             subrip-video-layer {
-                width: 100%;
-                height: 100%;
+                width: 100vw;
+                height: 100vh;
                 background: black;
             }
         </style>
