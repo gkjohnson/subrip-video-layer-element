@@ -1,3 +1,5 @@
+import SubRipParser from './SubRipParser.js';
+
 export default
 class SubripVideoLayerElement extends HTMLElement {
 
@@ -25,6 +27,18 @@ class SubripVideoLayerElement extends HTMLElement {
 
     }
 
+    get useVideoTrack () {
+
+        return !!this.hasAttribute('use-text-track');
+
+    }
+
+    set useTextTrack (val) {
+
+        val ? this.setAttribute('use-text-track') : this.removeAttribute('use-text-track');
+
+    }
+
     constructor () {
 
         super();
@@ -35,9 +49,10 @@ class SubripVideoLayerElement extends HTMLElement {
                     font-family: helvetica, arial, sans-serif;
                     color: white;
                     font-weight: bold;
-                    font-size: 20px;
+                    font-size: 25px;
                     text-shadow: ${ this._getTextShadowStyle() };
                     text-align:center;
+                    display: inline-block;
                 }
 
                 :host .subtitle-container {
@@ -64,12 +79,13 @@ class SubripVideoLayerElement extends HTMLElement {
                 }
             `;
 
+        // Create global default styles for the video tag and browsers that
+        // can't use the shadowRoot
         if (!this.constructor._styleTag) {
 
             const styleTag = document.createElement('style');
             styleTag.innerHTML =
             `
-                ${ this.tagName } { display: inline-block; }
                 ${ this.tagName } video { width: 100%; height: 100% }
                 ${ subtitleContainerStyle.replace(':host', this.tagName) }
             `;
@@ -79,6 +95,7 @@ class SubripVideoLayerElement extends HTMLElement {
 
         }
 
+        // Initialize the subtitle container, style, and slot tags
         this.attachShadow({ mode: 'open' });
 
         const subc = document.createElement('div');
@@ -92,14 +109,73 @@ class SubripVideoLayerElement extends HTMLElement {
         this.shadowRoot.appendChild(document.createElement('slot'));
 
         this._subtitleContainer = subc;
+        this._lastTime = 0;
+        this.subtitles = null;
+
+        // TODO: add a mutation observer to the video so
+        // it can be added and removed from the wrapper
+        this.video.addEventListener('timeupdate', () => this.updateSubtitles());
+
     }
 
+    // Watch for when the subtitle tag changes
     attributeChangedCallback (attr, oldval, newval) {
 
         switch (attr) {
 
             case 'src':
+                this.subtitles = null;
+                this.updateSubtitles();
+                if (newval) {
+
+                    fetch(newval)
+                        .then(res => res.text())
+                        .then(txt => {
+
+                            this.subtitles = (new SubRipParser()).parse(txt);
+                            this.updateSubtitles();
+
+                        });
+
+                }
                 break;
+
+        }
+
+    }
+
+    // Update the subtitles being displayed
+    updateSubtitles () {
+
+        const vid = this.video;
+        if (this.subtitles && vid) {
+
+            // Iterate over all the subtitles and find the ones
+            // that should be displayed right now. This approach
+            // is pretty heavy handed.
+            // NOTE: this takes ~0.01 to 0.1ms per frame to remove
+            // and re-add all the subtitle divs.
+            const subtitles = this.subtitles;
+            const ct = vid.currentTime;
+            let res = '';
+            for (let i = 0, l = subtitles.length; i < l; i++) {
+
+                const sub = subtitles[i];
+                if (ct > sub.start && ct < sub.end) {
+
+                    res += `<div>${ sub.subtitle }</div>`;
+
+                }
+
+            }
+
+            this._subtitleContainer.innerHTML = res;
+            this._lastTime = vid.currentTime;
+
+        } else {
+
+            this._subtitleContainer.innerHTML = '';
+            this._lastTime = 0;
 
         }
 
@@ -109,7 +185,7 @@ class SubripVideoLayerElement extends HTMLElement {
     _getTextShadowStyle () {
 
         const offsets = [];
-        const total = 16;
+        const total = 160;
         for (let i = 0; i < total; i++) {
 
             const angle = 2 * Math.PI * (i / total);
