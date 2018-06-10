@@ -12,7 +12,7 @@ class SubRipParser {
             const index = parseInt(lines[0]);
 
             const [st, end] = lines[1].split(/-->/);
-            const subtitle = lines[2];
+            const subtitle = [lines[2]];
 
             res.push({
                 index,

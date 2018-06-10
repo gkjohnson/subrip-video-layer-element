@@ -1,5 +1,6 @@
 import SubRipParser from './SubRipParser.js';
 
+// TODO: Support full screen
 export default
 class SubripVideoLayerElement extends HTMLElement {
 
@@ -27,6 +28,8 @@ class SubripVideoLayerElement extends HTMLElement {
 
     }
 
+    // TODO: Implement the ability to convert to and from VTT and use
+    // the built in VTT functionality
     get useVideoTrack () {
 
         return !!this.hasAttribute('use-text-track');
@@ -87,7 +90,7 @@ class SubripVideoLayerElement extends HTMLElement {
             styleTag.innerHTML =
             `
                 ${ this.tagName } video { width: 100%; height: 100% }
-                ${ subtitleContainerStyle.replace(':host', this.tagName) }
+                ${ subtitleContainerStyle.replace(/:host/g, this.tagName) }
             `;
 
             document.head.appendChild(styleTag);
@@ -163,7 +166,7 @@ class SubripVideoLayerElement extends HTMLElement {
                 const sub = subtitles[i];
                 if (ct > sub.start && ct < sub.end) {
 
-                    res += `<div>${ sub.subtitle }</div>`;
+                    res += sub.subtitle.map(s => `<div>${ s }</div>`).join('');
 
                 }
 

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "parcel build ./player/index.html --public-url ./ --no-cache --no-source-maps --out-dir ./player/bundle",
     "start": "static-server"
   },
   "repository": {
@@ -19,6 +20,7 @@
     "@webcomponents/webcomponentsjs": "^2.0.0"
   },
   "devDependencies": {
+    "parcel-bundler": "^1.8.1",
     "static-server": "^2.2.1"
   }
 }
