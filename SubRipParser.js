@@ -1,7 +1,7 @@
 export default
 class SubRipParser {
 
-    parse (str) {
+    parse(str) {
 
         const res = [];
         const subtitles = str.trim().replace(/\r/g, '').split(/\n\n/g);
@@ -27,7 +27,7 @@ class SubRipParser {
 
     }
 
-    subTimeToSec (time) {
+    subTimeToSec(time) {
 
         const [hr, min, sec, ms] = time.split(/:|,/g);
         return parseInt(hr) * 60 * 60 + parseInt(min) * 60 + parseInt(sec) + parseInt(ms) / 1000;

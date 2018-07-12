@@ -4,45 +4,28 @@ import SubRipParser from './SubRipParser.js';
 export default
 class SubripVideoLayerElement extends HTMLElement {
 
-    static get observedAttributes () {
+    static get observedAttributes() { return ['src']; }
 
-        return ['src'];
+    get video() { return this.querySelector('video'); }
 
-    }
-
-    get video () {
-
-        return this.querySelector('video');
-
-    }
-
-    get src () {
-
-        return this.getAttribute('src') || '';
-
-    }
-
-    set src (val) {
-
-        this.setAttribute('src', val);
-
-    }
+    get src() { return this.getAttribute('src') || ''; }
+    set src(val) { this.setAttribute('src', val); }
 
     // TODO: Implement the ability to convert to and from VTT and use
     // the built in VTT functionality
-    get useVideoTrack () {
+    get useVideoTrack() {
 
         return !!this.hasAttribute('use-text-track');
 
     }
 
-    set useTextTrack (val) {
+    set useTextTrack(val) {
 
         val ? this.setAttribute('use-text-track') : this.removeAttribute('use-text-track');
 
     }
 
-    constructor () {
+    constructor() {
 
         super();
 
@@ -124,7 +107,7 @@ class SubripVideoLayerElement extends HTMLElement {
     }
 
     // Watch for when the subtitle tag changes
-    attributeChangedCallback (attr, oldval, newval) {
+    attributeChangedCallback(attr, oldval, newval) {
 
         switch (attr) {
 
@@ -150,7 +133,7 @@ class SubripVideoLayerElement extends HTMLElement {
     }
 
     // Update the subtitles being displayed
-    updateSubtitles () {
+    updateSubtitles() {
 
         const vid = this.video;
         if (this.subtitles && vid) {
@@ -187,7 +170,7 @@ class SubripVideoLayerElement extends HTMLElement {
     }
 
     /* Utilities */
-    _getTextShadowStyle () {
+    _getTextShadowStyle() {
 
         const offsets = [];
         const total = 16;

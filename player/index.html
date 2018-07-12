@@ -18,37 +18,28 @@
             }
 
             #instructions {
-                opacity: 1;
-                transition: opacity 0.25s ease;
-            }
-
-            #instructions.hidden {
-                opacity: 0;
-            }
-
-            #instructions > div {
-                position: absolute;
-                z-index: 1;
-                text-align: center;
-                width: 100%;
-                padding: 10px 0;
-
-                font-size: 25px;
-            }
-
-            #instructions > table {
-                position: absolute;
-                z-index: 1;
-                display: inline-block;
                 font-size: 13px;
                 opacity: 0.5;
 
-                left: 10px;
-                bottom: 60px;
+                position: absolute;
+                z-index: 1;
+                display: inline-block;
+                left: 20px;
+                bottom: 20px;
+                pointer-events: none;
+            }
+
+            #instructions > div {
+                margin-top: 15px;
+                font-size: 20px;
+                font-weight: 100;
+            }
+
+            #instructions.hidden {
+                display: none;
             }
 
             #instructions > table td:first-child {
-                padding: 0 10px;
                 font-weight: bold;
             }
 
@@ -70,7 +61,6 @@
     </head>
     <body>
         <div id="instructions">
-            <div>Drag and Drop a video and srt files</div>
             <table>
                 <tr>
                     <td>F</td>
@@ -89,6 +79,7 @@
                     <td>Adjust subtitle size</td>
                 </tr>
             </table>
+            <div>Drag and drop a video and .SRT files</div>
         </div>
         <subrip-video-layer>
             <video controls></video>
