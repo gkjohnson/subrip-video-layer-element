@@ -4,21 +4,21 @@
 
         <title>Subtitle Video Player</title>
 
-        <!-- <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script> -->
         <!-- use unpkg for static loading until bundling works -->
         <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.0/webcomponents-bundle.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
         <style>
             html, body {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
-                font-family: helvetica, arial, sans-serif;
+                font-family: 'Roboto', helvetica, arial, sans-serif;
                 color: white
             }
 
             #instructions {
-                font-size: 13px;
+                font-size: 18px;
                 opacity: 0.5;
 
                 position: absolute;
@@ -31,16 +31,21 @@
 
             #instructions > div {
                 margin-top: 15px;
-                font-size: 20px;
-                font-weight: 100;
+                font-size: 25px;
+                font-weight: 300;
             }
 
             #instructions.hidden {
                 display: none;
             }
 
+            #instructions > table td {
+                font-weight: 300;
+            }
+
             #instructions > table td:first-child {
-                font-weight: bold;
+                font-weight: 400;
+                padding-right: 20px;
             }
 
             subrip-video-layer {
@@ -72,7 +77,7 @@
                 </tr>
                 <tr>
                     <td>Left / Right</td>
-                    <td>Skip -/+ five seconds</td>
+                    <td>Skip - / + five seconds</td>
                 </tr>
                 <tr>
                     <td>Up / Down</td>
